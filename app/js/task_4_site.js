@@ -78,7 +78,7 @@ function click_on_news (object) {
 }
 
 // Підвантаження нових даних
-function load_more_paintings(n) {
+function load_more_news(n) {
     let a = 0;
     for (; a < n; ) {
         if (index >= news.length)
