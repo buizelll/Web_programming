@@ -56,19 +56,22 @@ function click_on_news (object) {
       let item_data = data.split("\n");
 
       let block =
-        `<div class="modal-header border-secondary">
+        `<div class="modal-header border-secondary text-white" class="modalWin">
             <div class="d-flex flex-column ms-3">
-               <h3 class="m-0">${item_data[0]}</h3>
+               <h2 class="m-0">${item_data[0]}</h2>
+               <span>Автор: ${item_data[1]}</span>
+               <span>Час публікації: ${item_data[2]}</span>
             </div>
-            <button type="button" class="btn-close bg-primary me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close bg-dark me-3" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          
-         <div class="modal-body">
-            <img src="../data/img/${item_data[1]}.jpg" class="w-100" alt="news">
+         <div class="modal-body text-white">
+            <img src="../data/img/${item_data[3]}.jpg" class="w-100" alt="news">
          </div>
          
-         <div class="modal-footer border-secondary">
-            <h5>${item_data[2]}</h5>
+         <div class="modal-footer border-secondary text-white">
+            <h4 align="left">${item_data[4]}</h4>
+            <p>${item_data[5]}</p>
          </div>`;
 
       $("#modal_content").html(block);
@@ -85,10 +88,10 @@ function load_more_news(n) {
             return void disable_load_button();
         $.get(`../data/text/${news[index]}.txt`, (n=>{
             let a = n.split("\n")
-              , t = `<div class="col-md-6 col-lg-4">\n               
-              <div class="p-2 painting" onclick="click_on_news(this)" data="${a[2]}">\n                  
-              <img src="../data/img/${a[2]}.jpg" class="w-100" alt="news">\n                  
-              <div class="bg-primary text-center">${a[0]}</div>\n               
+              , t = `<div class="col-md-6 col-lg-3">\n               
+              <div class="p-2 news" onclick="click_on_news(this)" data="${a[3]}">\n                  
+              <img src="../data/img/${a[3]}.jpg" class="w-100" alt="news">\n                  
+              <div class="bg-light text-dark">${a[0]}</div>\n               
               </div>\n            
               </div>`;
             $("#news").append(t)
@@ -121,4 +124,23 @@ $(document).ready(() => {
          load_more_news(8);
       });
    }, 300);
+});
+
+$(function() {
+ let header = $('.header');
+ let hederHeight = header.height(); // вычисляем высоту шапки
+  
+ $(window).scroll(function() {
+   if($(this).scrollTop() > 1) {
+    header.addClass('header_fixed');
+    $('body').css({
+       'paddingTop': hederHeight+'px' // делаем отступ у body, равный высоте шапки
+    });
+   } else {
+    header.removeClass('header_fixed');
+    $('body').css({
+     'paddingTop': 0 // удаляю отступ у body, равный высоте шапки
+    })
+   }
+ });
 });

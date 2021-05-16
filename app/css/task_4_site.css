@@ -8,6 +8,7 @@ li.nav-item {
    /* Меню сайту */
    #menu {
       border-right: 0px;
+      border-color: #6c757d;
    }
 }
 
@@ -21,7 +22,7 @@ li.nav-item {
    #context {
       height: 100vh;
       min-height: 100vh;
-      overflow-y: auto;
+      overflow-y: visible;
    }
 }
 
@@ -34,6 +35,22 @@ li.nav-item {
 
 /* Стилі при наведенні на новину */
 .news:hover {
-   border: 1px solid #0d6efd;
+   border: 1px solid #67696a;
    transition: border .3s;
+}
+
+body {
+   background-color: #f2f2d8;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #6c757d !important;
+}
+
+.header_fixed {
+  position: fixed;
+  left: 10px;
+  top: 0;
+  right: 0;
+  background-color: #f2f2d8;
 }
